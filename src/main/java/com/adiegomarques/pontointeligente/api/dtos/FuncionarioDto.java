@@ -10,6 +10,7 @@ public class FuncionarioDto {
 	
 	private Long id;
 	
+	
 	private String nome;
 	private String email;
 	private Optional<String> senha = Optional.empty();
