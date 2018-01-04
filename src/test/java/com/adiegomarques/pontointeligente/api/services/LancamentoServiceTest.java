@@ -35,6 +35,7 @@ public class LancamentoServiceTest {
 	@Autowired
 	private LancamentoService lancamentoService;
 
+	
 	@Before
 	public void setUp() throws Exception {
 		BDDMockito
