@@ -88,7 +88,7 @@ public class LancamentoControllerTest {
 	}
 	
 	@Test
-	@WithMockUser(username = "admin@admin.com", roles = {"ADMIN"})
+	@WithMockUser(username = "admin@admin.com", roles = {"ADMIN"})//Add no bamco
 	public void testRemoverLancamento() throws Exception {
 		BDDMockito.given(this.lancamentoService.buscarPorId(Mockito.anyLong())).willReturn(Optional.of(new Lancamento()));
 
@@ -97,8 +97,8 @@ public class LancamentoControllerTest {
 				.andExpect(status().isOk());
 	}
 	
-	//@Test
-	//@WithMockUser
+	@Test
+	@WithMockUser
 	public void testRemoverLancamentoAcessoNegado() throws Exception {
 		BDDMockito.given(this.lancamentoService.buscarPorId(Mockito.anyLong())).willReturn(Optional.of(new Lancamento()));
 
