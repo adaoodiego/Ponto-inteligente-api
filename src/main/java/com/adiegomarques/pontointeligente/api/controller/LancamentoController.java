@@ -41,7 +41,6 @@ import com.adiegomarques.pontointeligente.api.service.LancamentoService;
 @RequestMapping("/api/lancamentos")
 @CrossOrigin(origins = "*")
 public class LancamentoController {
-
 	private static final Logger log = LoggerFactory.getLogger(LancamentoController.class);
 	private final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
@@ -50,7 +49,7 @@ public class LancamentoController {
 
 	@Autowired
 	private FuncionarioService funcionarioService;
-	
+
 	@Value("${paginacao.qtd_por_pagina}")
 	private int qtdPorPagina;
 
@@ -65,8 +64,7 @@ public class LancamentoController {
 	 */
 	@GetMapping(value = "/funcionario/{funcionarioId}")
 	public ResponseEntity<Response<Page<LancamentoDto>>> listarPorFuncionarioId(
-			@PathVariable("funcionarioId") Long funcionarioId,
-			@RequestParam(value = "pag", defaultValue = "0") int pag,
+			@PathVariable("funcionarioId") Long funcionarioId, @RequestParam(value = "pag", defaultValue = "0") int pag,
 			@RequestParam(value = "ord", defaultValue = "id") String ord,
 			@RequestParam(value = "dir", defaultValue = "DESC") String dir) {
 		log.info("Buscando lançamentos por ID do funcionário: {}, página: {}", funcionarioId, pag);
@@ -108,7 +106,7 @@ public class LancamentoController {
 	 * @param lancamento
 	 * @param result
 	 * @return ResponseEntity<Response<LancamentoDto>>
-	 * @throws ParseException 
+	 * @throws ParseException
 	 */
 	@PostMapping
 	public ResponseEntity<Response<LancamentoDto>> adicionar(@Valid @RequestBody LancamentoDto lancamentoDto,
@@ -135,7 +133,7 @@ public class LancamentoController {
 	 * @param id
 	 * @param lancamentoDto
 	 * @return ResponseEntity<Response<Lancamento>>
-	 * @throws ParseException 
+	 * @throws ParseException
 	 */
 	@PutMapping(value = "/{id}")
 	public ResponseEntity<Response<LancamentoDto>> atualizar(@PathVariable("id") Long id,
@@ -164,7 +162,7 @@ public class LancamentoController {
 	 * @return ResponseEntity<Response<Lancamento>>
 	 */
 	@DeleteMapping(value = "/{id}")
-	@PreAuthorize("hasAnyRole('ADMIN')")//Apenas Administradores podem remover lançamentos
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	public ResponseEntity<Response<String>> remover(@PathVariable("id") Long id) {
 		log.info("Removendo lançamento: {}", id);
 		Response<String> response = new Response<String>();
@@ -181,8 +179,7 @@ public class LancamentoController {
 	}
 
 	/**
-	 * Valida um funcionário, verificando se ele é existente e válido no
-	 * sistema.
+	 * Valida um funcionário, verificando se ele é existente e válido no sistema.
 	 * 
 	 * @param lancamentoDto
 	 * @param result
@@ -224,9 +221,10 @@ public class LancamentoController {
 	 * @param lancamentoDto
 	 * @param result
 	 * @return Lancamento
-	 * @throws ParseException 
+	 * @throws ParseException
 	 */
-	private Lancamento converterDtoParaLancamento(LancamentoDto lancamentoDto, BindingResult result) throws ParseException {
+	private Lancamento converterDtoParaLancamento(LancamentoDto lancamentoDto, BindingResult result)
+			throws ParseException {
 		Lancamento lancamento = new Lancamento();
 
 		if (lancamentoDto.getId().isPresent()) {
@@ -253,5 +251,4 @@ public class LancamentoController {
 
 		return lancamento;
 	}
-
 }
